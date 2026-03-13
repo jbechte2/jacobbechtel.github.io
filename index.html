@@ -1,8 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head><title>Jacob Bechtel</title></head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jacob Bechtel</title>
+    <meta
+      name="description"
+      content="Personal website of Jacob Bechtel."
+    >
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/includes.js"></script>
+  </head>
   <body>
-    <h1>Personal website of Jacob Bechtel.</h1>
+    <div data-current="home" data-include="includes/header.html" data-root="."></div>
+
+    <main class="main-content">
+      <div class="content-shell">
+        <section class="page-intro">
+          <h1>Jacob Bechtel</h1>
+          <p class="lead">
+            I'm a first-year PhD student at the University of Notre Dame studying
+            Computer Science and Engineering. My research focuses on
+            content-addressable memory and the democratization of EDA
+            education. I am co-advised by
+            <a href="https://engineering.nd.edu/faculty/matthew-morrison/" rel="noreferrer">Dr. Matthew Morrison</a>
+            and
+            <a href="https://sites.nd.edu/xsharon-hu/" rel="noreferrer">Dr. Xiaobo Sharon Hu</a>.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <div data-include="includes/footer.html" data-root="."></div>
   </body>
 </html>
-
