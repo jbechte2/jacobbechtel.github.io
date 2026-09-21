@@ -1,10 +1,11 @@
 :root {
   --bg: #ffffff;
-  --ink: #1f2933;
+  --ink: #24313d;
   --muted: #616e7c;
   --accent: #1d4f7a;
   --line: #e6e9ed;
-  --content-width: 760px;
+  --content-width: 900px;
+  --reading-width: 70ch;
 }
 
 * {
@@ -16,22 +17,31 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
   background: var(--bg);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
-.site-shell {
-  width: calc(100% - 2rem);
-  margin: 0 auto;
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.site-shell,
 .content-shell {
-  width: min(calc(100% - 2rem), var(--content-width));
+  width: min(calc(100% - 3rem), var(--content-width));
   margin: 0 auto;
 }
 
@@ -41,20 +51,22 @@ a {
 
 .site-header-inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem 0;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
 }
 
 .site-mark {
   color: var(--ink);
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .site-mark strong {
   display: block;
-  font-size: 1.12rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -68,33 +80,35 @@ a {
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.25rem 1.4rem;
   justify-content: flex-end;
 }
 
 .site-nav a {
+  padding: 0.5rem 0;
   color: var(--muted);
-  font-size: 1.12rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
   text-decoration: none;
 }
 
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .site-nav a[aria-current="page"] {
-  color: var(--ink);
+  color: var(--accent);
   text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-underline-offset: 0.4em;
 }
 
 .main-content {
   flex: 1 0 auto;
-  padding: 3rem 0 4rem;
+  padding: clamp(2.5rem, 6vw, 5rem) 0 5rem;
 }
 
 .page-intro,
 .page-section,
 .page-list {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .page-intro:first-child {
@@ -110,37 +124,50 @@ a {
   text-transform: uppercase;
 }
 
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
 h1 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
   line-height: 1.3;
 }
 
 h3 {
   margin: 0;
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-size: 1.25rem;
   line-height: 1.4;
 }
 
 p,
 li {
-  color: var(--muted);
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+p {
+  max-width: var(--reading-width);
+  margin: 0.85rem 0 0;
 }
 
 .lead {
-  margin-top: 1rem;
-  font-size: 1.05rem;
+  max-width: 65ch;
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
 }
 
 .link-row {
@@ -148,11 +175,6 @@ li {
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.25rem;
-}
-
-.link-row a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
 }
 
 .plain-list {
@@ -172,11 +194,11 @@ li {
 
 .item-list {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .item {
-  padding-top: 1rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--line);
 }
 
@@ -186,9 +208,36 @@ li {
 }
 
 .meta-line {
-  margin: 0.35rem 0 0.6rem;
+  margin: 0.5rem 0 0;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.publication-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.publication-title {
+  display: block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.teaching-entry + .teaching-entry {
+  margin-top: 2rem;
+}
+
+.teaching-entry ul {
+  margin: 0.85rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.teaching-entry li + li {
+  margin-top: 0.3rem;
 }
 
 .site-footer {
@@ -199,15 +248,21 @@ li {
 .site-footer-inner {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: baseline;
   gap: 1rem;
-  padding: 1.25rem 0 2rem;
+  padding: 1.5rem 0 2rem;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
 }
 
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem 1.25rem;
 }
 
 .footer-links a {
@@ -217,9 +272,8 @@ li {
 
 .footer-links a:hover,
 .footer-links a:focus-visible {
-  color: var(--ink);
+  color: var(--accent);
   text-decoration: underline;
-  text-underline-offset: 0.18em;
 }
 
 code {
@@ -228,47 +282,40 @@ code {
 }
 
 .pdf-frame {
+  display: block;
   width: 100%;
   height: 980px;
   border: 1px solid var(--line);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
+  .site-shell,
+  .content-shell {
+    width: calc(100% - 2.5rem);
+  }
+
   .site-header-inner {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 0;
   }
 
   .site-nav {
     justify-content: flex-start;
-  }
-}
-
-@media (max-width: 700px) {
-  .site-shell,
-  .content-shell {
-    width: calc(100% - 1.5rem);
+    gap: 0.25rem 1.15rem;
   }
 
-  .site-header-inner,
-  .site-footer-inner,
   .split-list {
     grid-template-columns: 1fr;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .site-nav,
-  .footer-links {
-    gap: 0.75rem;
   }
 
   .main-content {
-    padding: 2rem 0 2.75rem;
+    padding-bottom: 3rem;
   }
 
-  h1 {
-    font-size: clamp(1.75rem, 8vw, 2.4rem);
+  .lead {
+    font-size: 1.05rem;
   }
 
   .pdf-frame {
@@ -276,41 +323,10 @@ code {
   }
 }
 
-@media (max-width: 520px) {
-  .site-shell,
-  .content-shell {
-    width: calc(100% - 1rem);
-  }
-
-  .site-header-inner {
-    padding: 1rem 0;
-  }
-
-  .site-mark strong,
-  .site-nav a {
-    font-size: 1rem;
-  }
-
-  .site-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-  }
-
+@media (max-width: 420px) {
   .site-footer-inner {
-    padding: 1rem 0 1.5rem;
-  }
-
-  .footer-links {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-  }
-
-  p,
-  li,
-  .lead {
-    font-size: 0.98rem;
+    gap: 0.75rem;
   }
 
   .pdf-frame {
