@@ -127,6 +127,7 @@ a:hover {
 .profile-photo {
   display: block;
   width: 100%;
+  max-width: 240px;
   height: auto;
   border-radius: 4px;
 }
